@@ -1,18 +1,25 @@
+package project;
+
 import org.lwjgl.glfw.GLFW;
 
 public class player
 {
-    // Spieler Variablen
-    static float playerX = 0f;
-    static float playerY = 0f;
-    static float playerZ = 0f;
+    // Koordinaten
+    public static float playerX = 0f;
+    public static float playerY = 0f;
+    public static float playerZ = -5f;
 
+    // Sprint
+    static boolean isSprinting = false;
+
+    // Letzte Maus-Position
     static double lastMouseX = 0f;
     static double lastMouseY = 0f;
 
-    static float xRotation = 0f;
-    static float yRotation = 0f;
-    static boolean isSprinting = false;
+    // Aktuelle Rotation der Maus
+    public static float xRotation = 0f;
+    public static float yRotation = 0f;
+
     static void cameraMovment()
     {
         // Erstellt leeren Array

@@ -1,3 +1,5 @@
+package project.helper;
+
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.stb.STBEasyFont;
@@ -7,7 +9,7 @@ import java.nio.ByteBuffer;
 public class drawText {
 
 
-    static void drawText(float x, float y,String input, float scale,float r, float g, float b)
+    public static void drawText(float x, float y,String input, float scale,float r, float g, float b)
     {
         // Speicher für den Text
         ByteBuffer buffer = BufferUtils.createByteBuffer(10000);

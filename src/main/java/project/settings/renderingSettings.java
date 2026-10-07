@@ -1,6 +1,8 @@
+package project.settings;
+
 import org.lwjgl.opengl.GL11;
 
-public class settings {
+public class renderingSettings {
 
     static public void applySettings()
     {

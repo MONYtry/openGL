@@ -1,31 +1,30 @@
+package project.helper;
+
 import org.lwjgl.opengl.GL11;
+import project.settings.renderingSettings;
 
 public class drawObjects {
 
     // Hilfs-Methode für Linien
-    static void drawLine(float x_start, float y_start, float x_end, float y_end)
+    static void draw2DLine(float x_start, float y_start, float x_end, float y_end)
     {
-
         GL11.glVertex2f(x_start, y_start);
         GL11.glVertex2f(x_end, y_end);
-
-
     }
-
 
     static void drawCube(float i)
     {
         GL11.glColor3f(i, 0f, i);
 
-        drawObjects.drawLine(-i,  i,  i,  i);
-        drawObjects.drawLine( i,  i,  i, -i);
-        drawObjects.drawLine( i, -i, -i, -i);
-        drawObjects.drawLine(-i, -i, -i,  i);
+        drawObjects.draw2DLine(-i,  i,  i,  i);
+        drawObjects.draw2DLine( i,  i,  i, -i);
+        drawObjects.draw2DLine( i, -i, -i, -i);
+        drawObjects.draw2DLine(-i, -i, -i,  i);
     }
 
     public static void drawCubeSmaller()
     {
-        settings.applySettings();
+        renderingSettings.applySettings();
 
         for (float i = 0.1f; i <= 0.5f; i += 0.1f) {
             GL11.glBegin(GL11.GL_LINES);
@@ -34,22 +33,31 @@ public class drawObjects {
         }
     }
 
-    static void drawTriangle(float i)
+    public static void drawTriangle(float i)
     {
         GL11.glBegin(GL11.GL_LINES);
 
         GL11.glColor3f(1f, 0f, 1f);
 
-        drawLine(-i, -i, 0f, i);  // links
-        drawLine(0f, i, i, -i);   // rechts
-        drawLine(i, -i, -i, -i); // unten
+        draw2DLine(-i, -i, 0f, i);  // links
+        draw2DLine(0f, i, i, -i);   // rechts
+        draw2DLine(i, -i, -i, -i); // unten
 
         GL11.glEnd();
     }
-
-    static void drawTrianglesSmaller()
+    public static void draw3DTriangle(float s)
     {
-        settings.applySettings();
+        GL11.glBegin(GL11.GL_QUADS);
+
+        // VORNE
+        GL11.glVertex3f(-s, -s,  s);
+        GL11.glVertex3f( s, -s,  s);
+        GL11.glVertex3f( s,  s,  s);
+        GL11.glVertex3f(-s,  s,  s);
+    }
+    public static void drawTrianglesSmaller()
+    {
+        renderingSettings.applySettings();
         for (float i = 0.1f; i <= 0.5f; i += 0.1f) {
             GL11.glBegin(GL11.GL_LINES);
             drawObjects.drawTriangle(i);
@@ -57,7 +65,7 @@ public class drawObjects {
         }
     }
 
-    static void drawCube3D(float s)
+    public static void drawCube3D(float s)
     {
         GL11.glColor3f(1f, 0f, 1f);
 
