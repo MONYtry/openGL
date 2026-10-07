@@ -28,10 +28,6 @@ public class drawText {
         // Text erstellen
         int quads = STBEasyFont.stb_easy_font_print(x, y, input, null, buffer);
 
-
-
-
-
         // Text zeichnen
         GL11.glEnableClientState(GL11.GL_VERTEX_ARRAY);
         GL11.glVertexPointer(2, GL11.GL_FLOAT, 16, buffer);

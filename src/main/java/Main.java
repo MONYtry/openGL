@@ -23,7 +23,7 @@ public class Main {
         GL.createCapabilities();
 
         boolean sichtbar = true;
-        int mode = -1;
+        int mode = 0;
         boolean spaceWasPressed = false;
 
         // Solange das Fenster nicht geschlossen wird (Quasi Main Loop)
@@ -58,9 +58,20 @@ public class Main {
             switch (mode)
             {
                 case (0):
-                    drawCubeSmaller();
+                    drawObjects.drawCubeSmaller();
                     drawText.drawText(10, 10, "Auswahl: Quadrat-Loop",2f,1f,1f,1f);
                     break;
+
+                case (1):
+                    drawText.drawText(10, 10, "Auswahl: Dreieck",2f,1f,1f,1f);
+                    drawObjects.drawTriangle(0.5f,true);
+                    break;
+
+                case (2):
+                    drawText.drawText(10, 10, "Auswahl: Dreieck-Loop",2f,1f,1f,1f);
+                    drawObjects.drawTrianglesSmaller();
+                    break;
+
                 default:
                     drawText.drawText(20, 20, "Druecke [LEERTASTE] um fortzufahren!",3f,0f,1f,1f);
             }
@@ -72,29 +83,5 @@ public class Main {
 
         // Fenster schließen
         GLFW.glfwTerminate();
-    }
-
-    public static void drawCubeSmaller()
-    {
-        // Kamera Einstellungen
-        GL11.glMatrixMode(GL11.GL_PROJECTION);
-
-        // Setzt Transform zurück
-        GL11.glLoadIdentity();
-
-        // Sichtbarer Bereich von -1 - 1
-        GL11.glOrtho(-1, 1, -1, 1, -1, 1);
-
-        // Setzt Kamera einstellung
-        GL11.glMatrixMode(GL11.GL_MODELVIEW);
-
-        // Setzt Transform zurück
-        GL11.glLoadIdentity();
-
-        for (float i = 0.1f; i <= 0.5f; i += 0.1f) {
-            GL11.glBegin(GL11.GL_LINES);
-            drawObjects.drawCube(i);
-            GL11.glEnd();
-        }
     }
 }
