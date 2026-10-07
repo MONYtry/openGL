@@ -10,13 +10,13 @@ import java.util.Random;
 
 public class worldgeneration
 {
-    static int zaxes = 0;
     static boolean isWorldLoaded = false;
     static Random random = new Random();
     static boolean isMessageSend = false;
 
     static int[] randomHEIGHT = new int[5];
     static int grassTexture;
+    static int stoneBricksTexture;
 
     static
     {
@@ -28,6 +28,7 @@ public class worldgeneration
     static
     {
         grassTexture = TextureLoader.loadTexture("textures/dirt.png");
+        stoneBricksTexture = TextureLoader.loadTexture("textures/stone_bricks.png");
     }
 
     public static void generateWorld()
@@ -51,15 +52,15 @@ public class worldgeneration
             GL11.glRotatef(player.xRotation, 1f, 0f, 0f);
             GL11.glRotatef(player.yRotation, 0f, 1f, 0f);
             GL11.glTranslatef(-player.playerX, -player.playerY, -player.playerZ);
+
             for (int height = 0; height < 3; height++)
             {
-
                 for (int length = 0; length < 3; length++)
                 {
                     for (int x = 0; x < 3; x++)
                     {
                         GL11.glPushMatrix();
-                        GL11.glTranslatef(x, height, 0);
+                        GL11.glTranslatef(x, height - 1f, 0);
                         drawObjects.drawCube3D(0.5f);
                         GL11.glPopMatrix();
                     }
@@ -67,9 +68,9 @@ public class worldgeneration
                     for (int z_axis = 0; z_axis < 3; z_axis++)
                     {
                         GL11.glPushMatrix();
-                        GL11.glTranslatef(length, height, z_axis);
+                        GL11.glTranslatef(length, height - 1f, z_axis);
                         GL11.glEnable(GL11.GL_TEXTURE_2D);
-                        GL11.glBindTexture(GL11.GL_TEXTURE_2D, grassTexture);
+                        GL11.glBindTexture(GL11.GL_TEXTURE_2D, stoneBricksTexture);
 
                         drawObjects.drawCube3D(0.5f);
                         GL11.glPopMatrix();

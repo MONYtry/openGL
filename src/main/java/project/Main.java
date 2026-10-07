@@ -29,7 +29,7 @@ public class Main {
                 "MONYs Küche",
                 0, 0
         );
-
+        // Deaktiviert den Cursor
         GLFW.glfwSetInputMode(Window_Main, GLFW.GLFW_CURSOR, GLFW.GLFW_CURSOR_DISABLED);
 
         // OpenGL mit Fenster verbinden
@@ -97,7 +97,7 @@ public class Main {
                     drawObjects.drawTrianglesSmaller();
                     break;
                 case (3):
-                    drawText.drawText(10, 10, "Auswahl: Rotierender Würfel",2f,1f,1f,1f);
+                    drawText.drawText(10, 10, "Auswahl: Minecraft-Clone",2f,1f,1f,1f);
                     worldgeneration.generateWorld();
                     break;
                 default:
