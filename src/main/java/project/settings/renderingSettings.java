@@ -14,7 +14,7 @@ public class renderingSettings {
         GL11.glLoadIdentity();
     }
 
-    static void apply3DSettings()
+    public static void apply3DSettings()
     {
         GL11.glMatrixMode(GL11.GL_PROJECTION);
         GL11.glLoadIdentity();

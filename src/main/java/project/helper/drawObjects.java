@@ -67,45 +67,92 @@ public class drawObjects {
 
     public static void drawCube3D(float s)
     {
-        GL11.glColor3f(1f, 0f, 1f);
+        GL11.glColor3f(1f, 1f, 1f);
 
         GL11.glBegin(GL11.GL_QUADS);
 
         // VORNE
+        GL11.glTexCoord2f(0f, 0f);
         GL11.glVertex3f(-s, -s,  s);
+
+        GL11.glTexCoord2f(1f, 0f);
         GL11.glVertex3f( s, -s,  s);
+
+        GL11.glTexCoord2f(1f, 1f);
         GL11.glVertex3f( s,  s,  s);
+
+        GL11.glTexCoord2f(0f, 1f);
         GL11.glVertex3f(-s,  s,  s);
+
 
         // HINTEN
-        GL11.glVertex3f(-s, -s, -s);
-        GL11.glVertex3f(-s,  s, -s);
-        GL11.glVertex3f( s,  s, -s);
+        GL11.glTexCoord2f(0f, 0f);
         GL11.glVertex3f( s, -s, -s);
+
+        GL11.glTexCoord2f(1f, 0f);
+        GL11.glVertex3f(-s, -s, -s);
+
+        GL11.glTexCoord2f(1f, 1f);
+        GL11.glVertex3f(-s,  s, -s);
+
+        GL11.glTexCoord2f(0f, 1f);
+        GL11.glVertex3f( s,  s, -s);
+
 
         // LINKS
+        GL11.glTexCoord2f(0f, 0f);
         GL11.glVertex3f(-s, -s, -s);
+
+        GL11.glTexCoord2f(1f, 0f);
         GL11.glVertex3f(-s, -s,  s);
+
+        GL11.glTexCoord2f(1f, 1f);
         GL11.glVertex3f(-s,  s,  s);
+
+        GL11.glTexCoord2f(0f, 1f);
         GL11.glVertex3f(-s,  s, -s);
 
+
         // RECHTS
-        GL11.glVertex3f(s, -s, -s);
-        GL11.glVertex3f(s,  s, -s);
-        GL11.glVertex3f(s,  s,  s);
-        GL11.glVertex3f(s, -s,  s);
+        GL11.glTexCoord2f(0f, 0f);
+        GL11.glVertex3f( s, -s,  s);
+
+        GL11.glTexCoord2f(1f, 0f);
+        GL11.glVertex3f( s, -s, -s);
+
+        GL11.glTexCoord2f(1f, 1f);
+        GL11.glVertex3f( s,  s, -s);
+
+        GL11.glTexCoord2f(0f, 1f);
+        GL11.glVertex3f( s,  s,  s);
+
 
         // OBEN
-        GL11.glVertex3f(-s, s, -s);
-        GL11.glVertex3f(-s, s,  s);
-        GL11.glVertex3f( s, s,  s);
-        GL11.glVertex3f( s, s, -s);
+        GL11.glTexCoord2f(0f, 0f);
+        GL11.glVertex3f(-s,  s, -s);
+
+        GL11.glTexCoord2f(1f, 0f);
+        GL11.glVertex3f( s,  s, -s);
+
+        GL11.glTexCoord2f(1f, 1f);
+        GL11.glVertex3f( s,  s,  s);
+
+        GL11.glTexCoord2f(0f, 1f);
+        GL11.glVertex3f(-s,  s,  s);
+
 
         // UNTEN
-        GL11.glVertex3f(-s, -s, -s);
-        GL11.glVertex3f( s, -s, -s);
-        GL11.glVertex3f( s, -s,  s);
+        GL11.glTexCoord2f(0f, 0f);
         GL11.glVertex3f(-s, -s,  s);
+
+        GL11.glTexCoord2f(1f, 0f);
+        GL11.glVertex3f( s, -s,  s);
+
+        GL11.glTexCoord2f(1f, 1f);
+        GL11.glVertex3f( s, -s, -s);
+
+        GL11.glTexCoord2f(0f, 1f);
+        GL11.glVertex3f(-s, -s, -s);
 
         GL11.glEnd();
     }
