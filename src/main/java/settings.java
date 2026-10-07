@@ -11,4 +11,19 @@ public class settings {
         GL11.glMatrixMode(GL11.GL_MODELVIEW);
         GL11.glLoadIdentity();
     }
+
+    static void apply3DSettings()
+    {
+        GL11.glMatrixMode(GL11.GL_PROJECTION);
+        GL11.glLoadIdentity();
+
+        GL11.glFrustum(
+                -1, 1,
+                -1, 1,
+                1, 10
+        );
+
+        GL11.glMatrixMode(GL11.GL_MODELVIEW);
+        GL11.glLoadIdentity();
+    }
 }
