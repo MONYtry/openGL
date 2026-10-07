@@ -4,10 +4,17 @@ import org.lwjgl.opengl.GL11;
 
 public class Main {
 
+    // Spieler Variablen
     static float playerX = 0f;
     static float playerY = 0f;
     static float playerZ = 0f;
-    static float yrotation = 0f;
+
+    static double lastMouseX = 0f;
+    static double lastMouseY = 0f;
+
+    static float xRotation = 0f;
+    static float yRotation = 0f;
+
     static long Window_Main;
 
     public static void main(String[] args)
@@ -78,7 +85,6 @@ public class Main {
                     settings.applySettings();
                     // Spieler bewegen
                     GL11.glTranslatef(playerX, playerY, 0f);
-                    GL11.glRotatef(yrotation,0f,1f,0f);
 
                     // Dreieck zeichnen
                     drawObjects.drawTriangle(0.5f);
@@ -93,7 +99,6 @@ public class Main {
                     break;
                 case (3):
                     drawText.drawText(10, 10, "Auswahl: Rotierender Würfel",2f,1f,1f,1f);
-                    GL11.glTranslatef(playerX, playerY, 0f);
                     make3DCube();
                     break;
                 default:
@@ -118,9 +123,11 @@ public class Main {
 
 
         GL11.glTranslatef(playerX, playerY, playerZ);
-
         GL11.glTranslatef(0f, 0f, -3f);
-        GL11.glRotatef(yrotation, 0f, 1f, 0f);
+
+        GL11.glRotatef(xRotation, 1f, 0f, 0f);
+        GL11.glRotatef(yRotation, 0f, 1f, 0f);
+
 
         GL11.glBegin(GL11.GL_LINES);
         drawObjects.drawCube3D(0.5f);
@@ -128,9 +135,32 @@ public class Main {
     }
 
 
+
+    static void cameraMovment()
+    {
+        // Erstellt leeren Array
+        double[] xPos = new double[1];
+        double[] yPos = new double[1];
+
+        // Holt sich Position
+        GLFW.glfwGetCursorPos(Window_Main, yPos, xPos);
+
+        // MausMovment wird berechnet
+        double mouseMovementX = xPos[0] - lastMouseX;
+        double mouseMovementY = yPos[0] - lastMouseY;
+
+        // Rotation wird addiert
+        xRotation += (float) mouseMovementX * 0.2f;
+        yRotation += (float) mouseMovementY * 0.2f;
+
+        // Werte werden gesetzt
+        lastMouseX = xPos[0];
+        lastMouseY = yPos[0];
+    }
+
     static void movment()
     {
-
+        cameraMovment();
         // Links
         if (GLFW.glfwGetKey(Window_Main, GLFW.GLFW_KEY_A) == GLFW.GLFW_PRESS)
         {
