@@ -2,10 +2,16 @@ import org.lwjgl.glfw.GLFW;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL11;
 
+import java.util.Random;
+import java.util.random.RandomGenerator;
+
 public class Main {
 
-
     static long Window_Main;
+    static boolean isWorldLoaded = false;
+    static int[] worldHeights = new int[20];
+    static Random random = new Random();
+
 
     public static void main(String[] args)
     {
@@ -13,6 +19,7 @@ public class Main {
         boolean sichtbar = true;
         int mode = 0;
         boolean spaceWasPressed = false;
+
 
         // OpenGL wird geladen
         GLFW.glfwInit();
@@ -24,11 +31,14 @@ public class Main {
                 0, 0
         );
 
+        GLFW.glfwSetInputMode(Window_Main, GLFW.GLFW_CURSOR, GLFW.GLFW_CURSOR_DISABLED);
+
         // OpenGL mit Fenster verbinden
         GLFW.glfwMakeContextCurrent(Window_Main);
 
         // OpenGL zeichnet das erstellte Fenster
         GL.createCapabilities();
+        GL11.glEnable(GL11.GL_DEPTH_TEST);
 
 
 
@@ -37,7 +47,7 @@ public class Main {
         {
             GLFW.glfwPollEvents();
             player.movment();
-            GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
+            GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
 
 
             if (GLFW.glfwGetKey(Window_Main,GLFW.GLFW_KEY_ESCAPE) == GLFW.GLFW_PRESS)
@@ -109,16 +119,31 @@ public class Main {
     {
         settings.apply3DSettings();
 
+        // Welt nur EINMAL generieren
+        if (!isWorldLoaded)
+        {
+            for (int i = 0; i < worldHeights.length; i++)
+            {
+                worldHeights[i] = random.nextInt(6);
+            }
+            isWorldLoaded = true;
+        }
 
-        GL11.glTranslatef(player.playerX, player.playerY, player.playerZ);
-        GL11.glTranslatef(0f, 0f, -3f);
-
+        // Kamera (erst Rotation, dann Position)
         GL11.glRotatef(player.xRotation, 1f, 0f, 0f);
         GL11.glRotatef(player.yRotation, 0f, 1f, 0f);
+        GL11.glTranslatef(-player.playerX, -player.playerY, -player.playerZ);
 
+        // Welt zeichnen
+        for (int x = 0; x < worldHeights.length; x++)
+        {
+            GL11.glPushMatrix();
 
-        GL11.glBegin(GL11.GL_LINES);
-        drawObjects.drawCube3D(0.5f);
-        GL11.glEnd();
+            GL11.glTranslatef(x, worldHeights[x], 0f);
+
+            drawObjects.drawCube3D(0.5f);
+
+            GL11.glPopMatrix();
+        }
     }
 }
