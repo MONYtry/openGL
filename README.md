@@ -17,6 +17,35 @@ A personal Java learning project focused on OpenGL rendering, window management,
 - World generation and block-based scene rendering
 - Lightweight Gradle setup with LWJGL dependencies
 
+# 📷 Showcase
+
+<p align="center">
+  <img src="images/minecraft-clone.png" width="70%" alt="Minecraft-like block world" />
+</p>
+
+<p align="center">
+  <b>🌍 Minecraft-like Block World</b><br>
+  Procedurally generated 3D world with block-based rendering. (Still in progress)
+</p>
+
+<br>
+
+<table align="center">
+  <tr>
+    <td align="center">
+      <img src="images/squareLoop.png" width="400" alt="Square loop rendering" />
+      <br>
+      <b>⬛ Square Loop</b>
+    </td>
+    <td align="center">
+      <img src="images/triangleLoop.png" width="400" alt="Triangle loop rendering" />
+      <br>
+      <b>🔺 Triangle Loop</b>
+    </td>
+  </tr>
+</table>
+
+
 ## 🧩 Project Overview
 
 This repository is a hands-on learning project for exploring:
