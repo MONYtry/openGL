@@ -1,9 +1,9 @@
-package project.world;
+package project.minecraft.world;
 
 import org.lwjgl.opengl.GL11;
 import project.helper.TextureLoader;
 import project.helper.drawObjects;
-import project.player;
+import project.minecraft.player;
 import project.settings.renderingSettings;
 
 import java.util.Random;
@@ -25,6 +25,8 @@ public class worldgeneration
             randomHEIGHT[i]= random.nextInt(6) + 1;
         }
     }
+
+    // Läd Texutren und Speichert sie als Int
     static
     {
         grassTexture = TextureLoader.loadTexture("textures/dirt.png");
@@ -70,7 +72,7 @@ public class worldgeneration
                         GL11.glPushMatrix();
                         GL11.glTranslatef(length, height - 1f, z_axis);
                         GL11.glEnable(GL11.GL_TEXTURE_2D);
-                        GL11.glBindTexture(GL11.GL_TEXTURE_2D, stoneBricksTexture);
+                        GL11.glBindTexture(GL11.GL_TEXTURE_2D, grassTexture);
 
                         drawObjects.drawCube3D(0.5f);
                         GL11.glPopMatrix();

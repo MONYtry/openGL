@@ -5,30 +5,26 @@ import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL11;
 import project.helper.drawObjects;
 import project.helper.drawText;
+import project.minecraft.player;
 import project.settings.renderingSettings;
-import project.world.worldgeneration;
+import project.minecraft.world.worldgeneration;
 
 public class Main {
 
-    static long Window_Main;
+    public static long Window_Main;
 
     public static void main(String[] args)
     {
-
         boolean sichtbar = true;
         int mode = 0;
         boolean spaceWasPressed = false;
-
 
         // OpenGL wird geladen
         GLFW.glfwInit();
 
         // OpenGL Fenster erstellen
-        Window_Main = GLFW.glfwCreateWindow(
-                800, 600,
-                "MONYs Küche",
-                0, 0
-        );
+        Window_Main = GLFW.glfwCreateWindow(800, 600, "MONYs Küche", 0, 0);
+
         // Deaktiviert den Cursor
         GLFW.glfwSetInputMode(Window_Main, GLFW.GLFW_CURSOR, GLFW.GLFW_CURSOR_DISABLED);
 
@@ -39,13 +35,14 @@ public class Main {
         GL.createCapabilities();
         GL11.glEnable(GL11.GL_DEPTH_TEST);
 
-
-
         // Solange das Fenster nicht geschlossen wird (Quasi project.Main Loop)
         while (!GLFW.glfwWindowShouldClose(Window_Main))
         {
             GLFW.glfwPollEvents();
             player.movment();
+
+            // Setzt Hintergrundfarbe
+            GL11.glClearColor(0.2f,0.5f,0.8f,1.0f);
             GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
 
 

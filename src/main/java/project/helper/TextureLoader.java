@@ -11,6 +11,7 @@ import org.lwjgl.opengl.GL11;
 
 public class TextureLoader
 {
+    // Parameter für den Path
     public static int loadTexture(String path)
     {
         try
@@ -24,6 +25,7 @@ public class TextureLoader
             }
 
             BufferedImage image = ImageIO.read(input);
+
             // Holt sich große
             int width = image.getWidth();
             int height = image.getHeight();
@@ -31,9 +33,12 @@ public class TextureLoader
             // Erstellt Pixel
             int[] pixels = new int[width * height];
 
+            // Holt sich die Eigenschaften
             image.getRGB(0, 0, width, height, pixels, 0, width);
 
+            // Erstellt Buffer mit der große des Images * 4 <- Für genug Platz
             ByteBuffer buffer = BufferUtils.createByteBuffer(width * height * 4);
+
             // Holt sich die Pixel
             for (int y = 0; y < height; y++)
             {
@@ -50,8 +55,10 @@ public class TextureLoader
 
             buffer.flip();
 
+            // Erstellt den Int mit der generierten Texture
             int textureID = GL11.glGenTextures();
 
+            // Setzt Texture
             GL11.glBindTexture(GL11.GL_TEXTURE_2D, textureID);
             GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_NEAREST);
             GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_NEAREST);

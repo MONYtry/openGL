@@ -1,6 +1,7 @@
-package project;
+package project.minecraft;
 
 import org.lwjgl.glfw.GLFW;
+import project.Main;
 
 public class player {
     // Koordinaten
@@ -51,11 +52,12 @@ public class player {
     }
 
 
-    static void movment() {
+    public static void movment() {
+
         // Gravitation
         velocityY -= gravity;
         playerY += velocityY;
-
+        // Wenn Spieler auf Boden steht
         if (playerY < 0) {
             playerY = 0f;
             velocityY = 0f;
