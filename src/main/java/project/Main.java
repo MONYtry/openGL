@@ -5,9 +5,12 @@ import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL11;
 import project.helper.drawObjects;
 import project.helper.drawText;
+import project.minecraft.block.BlockWorld;
 import project.minecraft.player;
 import project.settings.renderingSettings;
 import project.minecraft.world.worldgeneration;
+
+import static project.minecraft.gamemode.isInSpectatorMode;
 
 public class Main {
 
@@ -16,7 +19,7 @@ public class Main {
     public static void main(String[] args)
     {
         boolean sichtbar = true;
-        int mode = 0;
+        int mode = 3;
         boolean spaceWasPressed = false;
 
         // OpenGL wird geladen
@@ -35,11 +38,23 @@ public class Main {
         GL.createCapabilities();
         GL11.glEnable(GL11.GL_DEPTH_TEST);
 
+        // Backface Culling aktivieren
+        GL11.glEnable(GL11.GL_CULL_FACE);
+        // Rückseiten verwerfen
+        GL11.glCullFace(GL11.GL_BACK);
+        // Sichtbare Vorderseiten: gegen den Uhrzeigersinn
+        GL11.glFrontFace(GL11.GL_CCW);
+
+        BlockWorld.addBlock(0, 0, 0);
+        BlockWorld.addBlock(1, 0, 0);
+        BlockWorld.addBlock(0, 1, 0);
+
         // Solange das Fenster nicht geschlossen wird (Quasi project.Main Loop)
         while (!GLFW.glfwWindowShouldClose(Window_Main))
         {
+
             GLFW.glfwPollEvents();
-            player.movment();
+
 
             // Setzt Hintergrundfarbe
             GL11.glClearColor(0.2f,0.5f,0.8f,1.0f);
@@ -95,7 +110,12 @@ public class Main {
                     break;
                 case (3):
                     drawText.drawText(10, 10, "Auswahl: Minecraft-Clone",2f,1f,1f,1f);
-                    worldgeneration.generateWorld();
+
+                    player.movment();
+                    //BlockWorld.update();
+                   // BlockWorld.render();
+
+                   worldgeneration.generateWorld();
                     break;
                 default:
                     drawText.drawText(20, 20, "Druecke [LEERTASTE] um fortzufahren!",3f,0f,1f,1f);

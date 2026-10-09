@@ -3,6 +3,8 @@ package project.minecraft;
 import org.lwjgl.glfw.GLFW;
 import project.Main;
 
+import static project.minecraft.gamemode.isInSpectatorMode;
+
 public class player {
     // Koordinaten
     public static float playerX = 0f;
@@ -113,9 +115,14 @@ public class player {
         float newX = playerX + movementX;
         float newZ = playerZ + movementZ;
 
-        if (!checkCollision(newX, playerY, newZ)) {
+        if (isInSpectatorMode) {
             playerX = newX;
             playerZ = newZ;
+        } else {
+            if (!checkCollision(newX, playerY, newZ)) {
+                playerX = newX;
+                playerZ = newZ;
+            }
         }
     }
 
