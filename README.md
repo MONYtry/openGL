@@ -1,4 +1,4 @@
-# 🎮 MONYtry OpenGL
+# 🎮  Learning OpenGL
 
 <p align="center">
   <img src="https://img.shields.io/badge/Java-17%2B-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white" alt="Java 17+" />
